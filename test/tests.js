@@ -26,12 +26,17 @@ describe('helpers.js', function() {
 describe('appdirectory.js', function() {
     describe('AppDirectory', function() {
         it('should handle instantiation options object', function() {
-            var ad = AppDirectory({
+            var ad = new AppDirectory({
                 appName: "myapp",
                 appAuthor: "Johz",
-                version: "0.1.1",
-                useRoaming: false,
+                appVersion: "0.1.1",
+                useRoaming: true,
             })
+
+            ad.should.containEql({appName: 'myapp'})
+            ad.should.containEql({appAuthor: 'Johz'})
+            ad.should.containEql({appVersion: '0.1.1'})
+            ad.should.containEql({useRoaming: true})
         })
     })
 })
