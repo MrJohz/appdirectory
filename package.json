@@ -1,0 +1,18 @@
+{
+  "name": "appdirectory",
+  "version": "0.0.1",
+  "description": "A cross-platform utility to find the best directory to put data and config files.",
+  "main": "lib/appdirectory.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "keywords": [
+    "cross-platform",
+    "utility",
+    "appdata",
+    "config",
+    "directory"
+  ],
+  "author": "Johz",
+  "license": "MIT"
+}
