@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/MrJohz/appdirectory.png?branch=master)](https://travis-ci.org/MrJohz/appdirectory)
+[![Coverage Status](https://coveralls.io/repos/MrJohz/appdirectory/badge.png)](https://coveralls.io/r/MrJohz/appdirectory)
 
 # AppDirectory
 
