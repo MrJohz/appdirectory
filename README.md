@@ -9,6 +9,7 @@ TODO!
 - site-config
 - user-cache
 - user-log
+- npm
 
 ### Known Limitations
 - On Windows Vista, the site-config and site-data directories are hidden system directories, which may cause issues.  I don't have a copy of Vista to hand to play around with how well this works, though, so YMMV.

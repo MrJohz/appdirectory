@@ -22,7 +22,7 @@ function monkeyPatchEnvironment(xdg) {
         oldEnv.XDG_DATA_HOME = process.env.XDG_DATA_HOME
         process.env.XDG_DATA_HOME = path.join("/home", "awesomeuser", "xdg", "share") // I don't know what an XDG_DATA_HOME directory should look like...
         oldEnv.XDG_DATA_DIRS = process.env.XDG_DATA_DIRS
-        xdgDataDirs = path.join("/usr", "xdg", "share") + path.delimiter + path.join("/usr", "local", "xdg", "share")
+        xdgDataDirs = path.join("/usr", "xdg", "share") + (path.delimiter || ':') + path.join("/usr", "local", "xdg", "share")
         process.env.XDG_DATA_DIRS = xdgDataDirs // I also don't know what an XDG_DATA_DIRS directory should look like...
     } else {
         oldEnv.XDG_DATA_HOME = process.env.XDG_DATA_HOME
