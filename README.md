@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/MrJohz/appdirectory.png?branch=master)](https://travis-ci.org/MrJohz/appdirectory)
+
 # AppDirectory
 
 ### Usage

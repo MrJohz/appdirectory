@@ -24,11 +24,15 @@ function monkeyPatchEnvironment(xdg) {
         oldEnv.XDG_DATA_DIRS = process.env.XDG_DATA_DIRS
         xdgDataDirs = path.join("/usr", "xdg", "share") + (path.delimiter || ':') + path.join("/usr", "local", "xdg", "share")
         process.env.XDG_DATA_DIRS = xdgDataDirs // I also don't know what an XDG_DATA_DIRS directory should look like...
+        oldEnv.XDG_CONFIG_HOME = process.env.XDG_CONFIG_HOME
+        process.env.XDG_CONFIG_HOME = path.join("/home", "awesomeuser", "xdg", ".config")
     } else {
         oldEnv.XDG_DATA_HOME = process.env.XDG_DATA_HOME
         process.env.XDG_DATA_HOME = ''
         oldEnv.XDG_DATA_DIRS = process.env.XDG_DATA_DIRS
         process.env.XDG_DATA_DIRS = ''
+        oldEnv.XDG_CONFIG_HOME = process.env.XDG_CONFIG_HOME
+        process.env.XDG_CONFIG_HOME = ''
     }
 }
 
@@ -37,6 +41,7 @@ function unPatchEnvironment() {
     process.env.APPDATA = oldEnv.APPDATA
     process.env.LOCALAPPDATA = oldEnv.LOCALAPPDATA
     process.env.XDG_DATA_HOME = oldEnv.XDG_DATA_HOME
+    process.env.XDG_CONFIG_HOME = oldEnv.XDG_CONFIG_HOME
 }
 
 describe('helpers.js', function() {
@@ -235,6 +240,58 @@ describe('appdirectory.js', function() {
                 })
 
                 ad.siteData().should.equal(path.join("/usr", "xdg", "share", "myapp"))
+
+                unPatchEnvironment() // return everything to how it was in case something weird's happening afterwards
+
+            })
+        })
+
+        describe('#userConfig', function() {
+            it('should return the correct paths on different OSs', function() {
+
+                monkeyPatchEnvironment(false) // get the correct system vars in place
+
+                var ad = new AppDirectory({
+                    appName: "myapp",
+                    appAuthor: "Johz",
+                    appVersion: "0.1.1",
+                    useRoaming: true,
+                    platform: "win32"
+                })
+
+                ad.userConfig().should.equal(path.join("C:", "Users", "awesomeuser", "AppData", "Roaming", "Johz", "myapp", "0.1.1"))
+
+                ad = new AppDirectory({
+                    appName: "myapp",
+                    useRoaming: false,
+                    platform: "win32"
+                })
+
+                ad.userConfig().should.equal(path.join("C:", "Users", "awesomeuser", "AppData", "Local", "myapp", "myapp"))
+
+                ad = new AppDirectory({
+                    appName: "myapp",
+                    platform: "darwin"
+                })
+
+                ad.userConfig().should.equal(path.join("/home", "awesomeuser", "Library", "Application Support", "myapp"))
+
+                ad = new AppDirectory({
+                    appName: "myapp",
+                    platform: "linux"
+                })
+
+                ad.userConfig().should.equal(path.join("/home", "awesomeuser", ".config", "myapp"))
+
+                unPatchEnvironment()
+                monkeyPatchEnvironment(true) // set XDG variables
+
+                ad = new AppDirectory({
+                    appName: "myapp",
+                    platform: "linux"
+                })
+
+                ad.userConfig().should.equal(path.join("/home", "awesomeuser", "xdg", ".config", "myapp"))
 
                 unPatchEnvironment() // return everything to how it was in case something weird's happening afterwards
 
