@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "A cross-platform utility to find the best directory to put data and config files.",
   "main": "lib/appdirectory.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/MrJohz/appdirectory.git"
+  },
   "scripts": {
     "test": "make test"
   },
