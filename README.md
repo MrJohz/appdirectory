@@ -41,10 +41,11 @@ That's pretty much all there is to it.
 
 ### Todo
 - Fix site* functions
-- npm
+- Test all user* functions
 
 ### Known Limitations
-- On Windows Vista, the site-config and site-data directories are hidden system directories, which may cause issues.  I don't have a copy of Vista to hand to play around with how well this works, though, so YMMV.
-- On unix-likes (including those with XDG-compliance), requesting the site-config and site-data directories will return just one directory, even in cases where the XDG* variables contain more than one individual path.  (Specifically, it will be the first path AppDirectory finds.)
+> Note: All this limitations have been fixed by virtue of removing the site* functions.  The aim is to add them back in, at which point they will still exist, as one's a design decision, and the other's unfixable as far as I can tell.  However, at this point, there are no known limitations to AppDirectory!  (Feel free to tell me about new limitations by filing an issue.)
+- ~~On Windows Vista, the site-config and site-data directories are hidden system directories, which may cause issues.  I don't have a copy of Vista to hand to play around with how well this works, though, so YMMV.~~
+- ~~On unix-likes (including those with XDG-compliance), requesting the site-config and site-data directories will return just one directory, even in cases where the XDG* variables contain more than one individual path.  (Specifically, it will be the first path AppDirectory finds.)~~
 
 [appdirs]: <https://pypi.python.org/pypi/appdirs/>
